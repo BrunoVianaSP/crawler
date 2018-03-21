@@ -33,6 +33,7 @@ public class TestFeedBuilder extends TestBase {
 	@Test
 	public void createItemNodeDescriptionsSuccessfuly() throws JSONException {
 		log.info("createItemNodeDescriptionsSuccessfuly");
+		log.info("jsonPage: " + jsonPage);
 		List<DescriptionParser> parsers = new ArrayList<>();
 		parsers.add(new LinkParser());
 		parsers.add(new ParagraphParser());

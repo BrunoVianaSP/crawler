@@ -48,8 +48,7 @@ public class TestMainController {
 	
 		mockMvc.perform(get(BASE_URL + port + "/feed/download/{user}/{pass}", user, pass)
 				.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
-				.andDo(print());
+				.andExpect(status().isOk()).andDo(print());	
 	}
 	
 //	@Test

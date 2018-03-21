@@ -26,7 +26,8 @@ public class FeedBuilder {
 
 	public Item readItem(int index) throws JSONException {
 		log.info("readItem");
-		JSONArray items = (JSONArray) jsonFeed.get("item");
+		JSONObject channel = getChannelLevel();
+		JSONArray items = (JSONArray) channel.get("item");
 		JSONObject itemNode = (JSONObject) items.get(0);
 		Item item = new Item();
 		item.setTitle(itemNode.getString("title"));
@@ -47,14 +48,26 @@ public class FeedBuilder {
 	}
 
 	public Feed buildFeed() {
+		
+		JSONObject channel = getChannelLevel();
+		System.out.println("channel: " + channel);
+		System.out.println("Key set: " + channel.keySet());
+		
 		Feed feed = new Feed();
-		feed.setTitle(jsonFeed.getString("title"));
-		feed.setLink(jsonFeed.getString("link"));
-		JSONArray items = (JSONArray) jsonFeed.get("item");
+		feed.setTitle(channel.getString("title"));
+		feed.setLink(channel.getString("link"));
+		JSONArray items = (JSONArray) channel.get("item");
+		
 		for (int index = 0; index < items.length(); index++) {
 			feed.add(readItem(index));
 		}
 		return feed;
+	}
+
+	private JSONObject getChannelLevel() {
+		JSONObject jsonRSS = (JSONObject) jsonFeed.get("rss");
+		JSONObject channel = (JSONObject) jsonRSS.get("channel");
+		return channel;
 	}
 	
 	
