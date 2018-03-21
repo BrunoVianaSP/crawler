@@ -40,8 +40,12 @@ public class TestBase {
 			e.printStackTrace();
 		}
 		readLines(oReader);
-		jsonPage = Parser.parseFromXMLToJson(sResponse);
+		createJsonPage();
 		readFirstItemNode();
+	}
+
+	private void createJsonPage() {
+		jsonPage = Parser.parseFromXMLToJson(sResponse);
 	}
 
 	private void readFirstItemNode() {

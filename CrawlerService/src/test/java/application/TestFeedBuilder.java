@@ -43,7 +43,7 @@ public class TestFeedBuilder extends TestBase {
 		log.info("item: " + item);
 		assertTrue(item.getDescription().size() > 0);
 	}
-	
+
 	@Test
 	public void createFullFeedSuccessfuly() throws JSONException {
 		log.info("createFullFeedSuccessfuly");
@@ -56,6 +56,5 @@ public class TestFeedBuilder extends TestBase {
 		log.info("feed: " + feed);
 		assertNotNull(feed);
 	}
-	
 
 }

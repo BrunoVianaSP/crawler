@@ -20,15 +20,15 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @ContextConfiguration(classes = Application.class)
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment= WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class TestMainController {
 
 	private static final String BASE_URL = "http://localhost";
 
-	@LocalServerPort 
+	@LocalServerPort
 	int port;
-	
+
 	@Autowired
 	protected MockMvc mockMvc;
 
@@ -45,24 +45,22 @@ public class TestMainController {
 	public void testEndpoint() throws Exception {
 		String user = "admin";
 		String pass = "admin";
-	
-		mockMvc.perform(get(BASE_URL + port + "/feed/download/{user}/{pass}", user, pass)
-				.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk()).andDo(print());	
-	}
-	
-//	@Test
-//	public void testEndpoint() throws Exception {
-//		User u = new User();
-//		u.setUsername("admin");
-//		u.setPass("admin");
-//	
-//		mockMvc.perform(post("/feed/download/")
-//				.content(new Gson().toJson(u))
-//				.contentType(MediaType.APPLICATION_JSON))
-//				.andExpect(status().isOk())
-//				.andDo(print());
-//	}
 
+		mockMvc.perform(get(BASE_URL + port + "/feed/download/{user}/{pass}", user, pass)
+				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andDo(print());
+	}
+
+	// @Test
+	// public void testEndpoint() throws Exception {
+	// User u = new User();
+	// u.setUsername("admin");
+	// u.setPass("admin");
+	//
+	// mockMvc.perform(post("/feed/download/")
+	// .content(new Gson().toJson(u))
+	// .contentType(MediaType.APPLICATION_JSON))
+	// .andExpect(status().isOk())
+	// .andDo(print());
+	// }
 
 }

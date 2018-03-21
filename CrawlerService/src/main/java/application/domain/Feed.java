@@ -9,7 +9,7 @@ public class Feed {
 
 	private String title;
 	private String link;
-	private Set<Item> items = new HashSet<>() ;
+	private Set<Item> items = new HashSet<>();
 
 	public Feed() {
 		// TODO Auto-generated constructor stub
@@ -26,7 +26,7 @@ public class Feed {
 	public void setItems(Set<Item> items) {
 		this.items = items;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}

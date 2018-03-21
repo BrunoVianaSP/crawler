@@ -15,6 +15,12 @@ import application.parser.DescriptionParser;
 
 public class FeedBuilder {
 
+	private static final String KEY_CHANNEL = "channel";
+	private static final String KEY_RSS = "rss";
+	private static final String KEY_ITEM = "item";
+	private static final String KEY_LINK = "link";
+	private static final String KEY_TITLE = "title";
+	
 	protected final Logger log = Logger.getLogger(getClass().getSimpleName());
 	private final JSONObject jsonFeed;
 	private final List<DescriptionParser> descriptionParsers;
@@ -25,13 +31,22 @@ public class FeedBuilder {
 	}
 
 	public Item readItem(int index) throws JSONException {
-		log.info("readItem");
+		JSONObject itemNode = extractItemNode();
+		Item item = createItem(itemNode);
+		return item;
+	}
+
+	private JSONObject extractItemNode() {
 		JSONObject channel = getChannelLevel();
-		JSONArray items = (JSONArray) channel.get("item");
+		JSONArray items = (JSONArray) channel.get(KEY_ITEM);
 		JSONObject itemNode = (JSONObject) items.get(0);
+		return itemNode;
+	}
+
+	private Item createItem(JSONObject itemNode) {
 		Item item = new Item();
-		item.setTitle(itemNode.getString("title"));
-		item.setLink(itemNode.getString("link"));
+		item.setTitle(itemNode.getString(KEY_TITLE));
+		item.setLink(itemNode.getString(KEY_LINK));
 		List<Description> descriptions = readDescriptions(itemNode.getString("description"));
 		item.setDescription(descriptions);
 		return item;
@@ -41,23 +56,21 @@ public class FeedBuilder {
 		List<Description> array = new ArrayList<>();
 		for (DescriptionParser parser : descriptionParsers) {
 			List<Description> list = parser.parse(description);
-			// log.info("list: " + list);
 			array.addAll(list);
 		}
 		return array;
 	}
 
 	public Feed buildFeed() {
-		
+
 		JSONObject channel = getChannelLevel();
-		System.out.println("channel: " + channel);
-		System.out.println("Key set: " + channel.keySet());
-		
+
 		Feed feed = new Feed();
-		feed.setTitle(channel.getString("title"));
-		feed.setLink(channel.getString("link"));
-		JSONArray items = (JSONArray) channel.get("item");
-		
+		feed.setTitle(channel.getString(KEY_TITLE));
+		feed.setLink(channel.getString(KEY_LINK));
+
+		JSONArray items = (JSONArray) channel.get(KEY_ITEM);
+
 		for (int index = 0; index < items.length(); index++) {
 			feed.add(readItem(index));
 		}
@@ -65,11 +78,8 @@ public class FeedBuilder {
 	}
 
 	private JSONObject getChannelLevel() {
-		JSONObject jsonRSS = (JSONObject) jsonFeed.get("rss");
-		JSONObject channel = (JSONObject) jsonRSS.get("channel");
+		JSONObject jsonRSS = (JSONObject) jsonFeed.get(KEY_RSS);
+		JSONObject channel = (JSONObject) jsonRSS.get(KEY_CHANNEL);
 		return channel;
 	}
-	
-	
-	
 }
