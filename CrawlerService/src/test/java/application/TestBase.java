@@ -41,18 +41,13 @@ public class TestBase {
 		}
 		readLines(oReader);
 		jsonPage = Parser.parseFromXMLToJson(sResponse);
-		changeJsonRoot();
 		readFirstItemNode();
 	}
 
-	private void changeJsonRoot() {
+	private void readFirstItemNode() {
 		JSONObject jsonRSS = (JSONObject) jsonPage.get("rss");
 		JSONObject channel = (JSONObject) jsonRSS.get("channel");
-		jsonPage = channel;
-	}
-
-	private void readFirstItemNode() {
-		JSONArray items = (JSONArray) jsonPage.get("item");
+		JSONArray items = (JSONArray) channel.get("item");
 		jsonItemNode = (JSONObject) items.get(0);
 		description = jsonItemNode.getString("description");
 	}
