@@ -37,7 +37,7 @@ Arquitetura de Comunicação: REST
 
 ## Amazon AWS Release
 Service URL: http://backend-challenge.us-west-2.elasticbeanstalk.com/feed/download/admin/admin   
-Tipo de Instância: t2.nano (Free tier)
+Tipo de Instância: t2.nano (Free tier)  
 Container: 64bit Amazon Linux; Tomcat 8; Java 8  
 
 ## Dívida Técnica
