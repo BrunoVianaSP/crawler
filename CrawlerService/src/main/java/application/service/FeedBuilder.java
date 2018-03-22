@@ -20,7 +20,7 @@ public class FeedBuilder {
 	private static final String KEY_ITEM = "item";
 	private static final String KEY_LINK = "link";
 	private static final String KEY_TITLE = "title";
-	
+
 	protected final Logger log = Logger.getLogger(getClass().getSimpleName());
 	private final JSONObject jsonFeed;
 	private final List<DescriptionParser> descriptionParsers;

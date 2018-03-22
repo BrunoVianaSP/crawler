@@ -35,6 +35,11 @@ Linguagen: Java
 Formatos de Arquivo: XML e JSON  
 Arquitetura de Comunicação: REST  
 
+## Amazon AWS Release
+Service URL: http://backend-challenge.us-west-2.elasticbeanstalk.com/feed/download/admin/admin   
+Tipo de Instância: t2.nano (Free tier)
+Container: 64bit Amazon Linux; Tomcat 8; Java 8  
+
 ## Dívida Técnica
 Não consegui deixar o conteúdo de texto perfeitamente legível. Nem mesmo utilizando Regex para remoção de caracteres especiais gerados por conta das tags HTML. 
 
